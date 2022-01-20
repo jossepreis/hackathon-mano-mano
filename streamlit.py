@@ -13,8 +13,11 @@ nltk.download(["names","stopwords","state_union","twitter_samples","movie_review
 from PIL import Image   
 import base64
 
-
-
+df_august = pd.read_csv('2022-01 Wild Code School x ManoMano_ CES Data Set.xlsx - August 2021.csv',low_memory = False)
+df_september = pd.read_csv('2022-01 Wild Code School x ManoMano_ CES Data Set.xlsx - September 2021.csv',low_memory = False)
+df_october = pd.read_csv('2022-01 Wild Code School x ManoMano_ CES Data Set.xlsx - October 2021.csv',low_memory = False)
+df_november = pd.read_csv('2022-01 Wild Code School x ManoMano_ CES Data Set.xlsx - November 2021.csv',low_memory = False)
+df_complet_clean = pd.read_csv('csv_1er_graph.csv',low_memory=False)
 
 
 def main():
@@ -82,6 +85,93 @@ def page1():
     st.markdown("<h1 style='text-align: center; color: black;'>Titre page 1</h1>", unsafe_allow_html=True)
     
     st.write ('-----------------------------------------------------------')
+
+
+
+
+    list_dict = []
+    for i in range(0,7):
+        df_score = df_complet_clean[df_complet_clean['score']==i]
+        dict_score = {}
+        for col in df_score.columns[-10:]:
+            dict_score[col]=df_score[col].value_counts()[1]
+        list_dict.append(dict_score)
+
+    dict_score = {}
+    for col in df_complet_clean.columns[-10:]:
+        dict_score[col]=df_complet_clean[col].value_counts()[1]
+
+    fig = make_subplots(
+    rows=4, cols=2,
+    subplot_titles=('total', 'score = 0','score = 1','score = 2','score = 3','score = 4','score = 5','score = 6'),
+    )
+
+
+    fig.append_trace(
+        go.Bar(x=list(dict_score.keys()),
+        y=list(dict_score.values()),
+        marker_color=px.colors.qualitative.Plotly),
+        row=1, col=1
+)
+
+    fig.append_trace(
+        go.Bar(x=list(list_dict[0].keys()),
+        y=list(list_dict[0].values()),
+        marker_color=px.colors.qualitative.Plotly),
+        row=1, col=2
+)
+
+    fig.append_trace(
+        go.Bar(x=list(list_dict[1].keys()),
+        y=list(list_dict[1].values()),
+        marker_color=px.colors.qualitative.Plotly),
+        row=2, col=1
+)
+
+    fig.append_trace(
+        go.Bar(x=list(list_dict[2].keys()),
+        y=list(list_dict[2].values()),
+        marker_color=px.colors.qualitative.Plotly),
+        row=2, col=2
+)
+
+    fig.append_trace(
+        go.Bar(x=list(list_dict[3].keys()),
+        y=list(list_dict[3].values()),
+        marker_color=px.colors.qualitative.Plotly),
+        row=3, col=1
+)
+
+    fig.append_trace(
+        go.Bar(x=list(list_dict[4].keys()),
+        y=list(list_dict[4].values()),
+        marker_color=px.colors.qualitative.Plotly),
+        row=3, col=2
+)
+
+    fig.append_trace(
+        go.Bar(x=list(list_dict[5].keys()),
+        y=list(list_dict[5].values()),
+        marker_color=px.colors.qualitative.Plotly),
+        row=4, col=1
+)
+
+    fig.append_trace(
+        go.Bar(x=list(list_dict[6].keys()),
+        y=list(list_dict[6].values()),
+        marker_color=px.colors.qualitative.Plotly),
+        row=4, col=2
+)
+
+    fig.update_layout(template='seaborn', title='Reasons' ,showlegend=False,height = 1250,width=1250)
+    st.plotly_chart (fig,use_container_width=True)
+
+
+
+    fig2 = px.pie(data_frame=df_complet_clean, names='score')
+
+    fig2.update_layout(template='seaborn', title='score' ,height = 800,width=500)
+    st.plotly_chart (fig2,use_container_width=True)
 
 
 
