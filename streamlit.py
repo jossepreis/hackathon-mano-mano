@@ -21,7 +21,7 @@ df_complet_clean = pd.read_csv('csv_hackathon_2.csv',low_memory=False)
 # Pivot table
 df_family_fee_avg=pd.pivot_table(data=df_complet_clean, index='family', values=['shipping_fees','ratio'], aggfunc='mean').reset_index()
 df_category_fee_avg=pd.pivot_table(data=df_complet_clean, index='category', values=['shipping_fees','ratio'], aggfunc='mean').reset_index()
-
+st.set_page_config(layout="wide")
 def main():
     
     pages = {
@@ -45,7 +45,7 @@ def main():
 
 def homepage():
     st.markdown('')
-    image1 = Image.open('Mano-Manon-new-logo.png')
+    image1 = Image.open('Mano-Manon-new-logo reduit.png')
     st.image(image1,)
   
 
