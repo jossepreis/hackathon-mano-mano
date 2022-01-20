@@ -106,7 +106,12 @@ def page1():
     fig2 = px.pie(data_frame=df_complet_clean, names='score',color_discrete_sequence=px.colors.qualitative.Plotly)
 
     fig2.update_traces(textposition='inside')
-    fig2.update_layout(template='seaborn', title='distribution of CES score' ,height = 800,width=500)
+    fig2.update_layout(template='seaborn', title={
+        'text': 'distribution of CES score',
+        'y':0.97,
+        'x':0.05} ,height = 800,width=500)
+
+
     st.plotly_chart (fig2,use_container_width=True)
     st.markdown('##')
     st.markdown('##')
@@ -177,7 +182,10 @@ def page1():
         row=4, col=2
 )
 
-    fig.update_layout(template='seaborn', title='reasons of bad CES score' ,showlegend=False,height = 1250,width=1000)
+    fig.update_layout(template='seaborn', title={
+        'text': 'reasons of bad CES score',
+        'y':0.97,
+        'x':0.05} ,showlegend=False,height = 1250,width=1000)
     st.plotly_chart (fig,use_container_width=True)
 
 
