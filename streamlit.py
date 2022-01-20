@@ -107,7 +107,7 @@ def page1():
 
     fig2.update_traces(textposition='inside')
     fig2.update_layout(template='seaborn', title='score' ,height = 800,width=500)
-
+    st.plotly_chart (fig2,use_container_width=True)
     st.markdown('##')
     st.markdown('##')
     st.markdown('##')
