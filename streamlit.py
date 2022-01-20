@@ -195,7 +195,7 @@ def page2():
 
     fig3.add_trace(go.Scatter(x=df_family_fee_avg['family'], y=df_family_fee_avg['shipping_fees'], mode='lines', name= 'Avg. Shipping Fees'), row=1, col=1)
     fig3.add_trace(go.Scatter(x=df_family_fee_avg['family'], y=df_family_fee_avg['ratio'], mode='lines', name= 'Avg. Ratio of SF on Total'), row=1, col=1)
-    fig3.update_layout(title='Shipping Fees vs Family',xaxis_title='Family',height = 800,width=1200)
+    fig3.update_layout(title='Shipping Fees vs Family',xaxis_title='Family',height = 600,width=1200)
     st.plotly_chart (fig3,use_container_width=True)
     
     
