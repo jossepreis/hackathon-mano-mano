@@ -103,10 +103,10 @@ def page1():
     for col in df_complet_clean.columns[-16:-6]:
         dict_score[col]=df_complet_clean[col].value_counts()[1]
 
-    fig2 = px.pie(data_frame=df_complet_clean, names='score')
+    fig2 = px.pie(data_frame=df_complet_clean, names='score',color_discrete_sequence=px.colors.qualitative.Plotly)
 
-    fig2.update_layout(template='seaborn', title='Score' ,height = 800,width=500)
-    st.plotly_chart (fig2,use_container_width=True)
+    fig2.update_traces(textposition='inside')
+    fig2.update_layout(template='seaborn', title='score' ,height = 800,width=500)
 
     st.markdown('##')
     st.markdown('##')
