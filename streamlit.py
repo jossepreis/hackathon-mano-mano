@@ -43,7 +43,7 @@ def homepage():
     image1 = Image.open('Mano-Manon-new-logo.png')
     st.image(image1,)
   
- 
+
     
     
     file_ = open("manamanoreduit.gif", "rb")
@@ -61,7 +61,17 @@ def homepage():
  
 
     st.markdown("<h1 style='text-align: center; color: black;'>Frais de port, freins à l'achat ?</h1>", unsafe_allow_html=True)
+    st.markdown('##')
+    st.markdown('##')
+    st.markdown('##')
+    st.markdown('##')
     
+    
+    
+    audio_file = open('Mahna Mahna (mais Non Mais Non) (radio Edit) Free Download  (hearthis.at).mp3', 'rb')
+    audio_bytes = audio_file.read()
+
+    st.audio(audio_bytes, format='audio/ogg')
     
 
 
