@@ -187,7 +187,7 @@ def page1():
 
 
 def page2():
-    st.set_page_config(layout="wide")
+
 
     st.markdown("<h1 style='text-align: center; color: black;'>Titre page 2</h1>", unsafe_allow_html=True)
     
