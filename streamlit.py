@@ -203,6 +203,14 @@ def page2():
     st.write ('-----------------------------------------------------------')
 
 
+    fig4 = make_subplots(rows=1, cols=1)
+
+    fig4.add_trace(go.Scatter(x=df_category_fee_avg['category'], y=df_category_fee_avg['shipping_fees'], mode='lines', name= 'Avg. Shipping Fees'), row=1, col=1)
+    fig4.add_trace(go.Scatter(x=df_category_fee_avg['category'], y=df_category_fee_avg['ratio'], mode='lines', name= 'Avg. Ratio of SF on Total'), row=1, col=1)
+    fig4.update_layout(title='Shipping Fees vs Category',
+                   xaxis_title='Category')
+    st.plotly_chart (fig4,use_container_width=True)
+
 
 
 def page3():
