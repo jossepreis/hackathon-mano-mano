@@ -63,7 +63,7 @@ def homepage():
   
  
 
-    st.markdown("<h3 style='text-align: center; color: black;'>Shipping costs, barrier to ecommerce purchases?</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center; color: black;'>Shipping costs: major barrier to e-commerce purchases?</h3>", unsafe_allow_html=True)
     st.markdown('##')
     st.markdown('##')
     st.markdown('##')
@@ -100,6 +100,14 @@ def page1():
     dict_score = {}
     for col in df_complet_clean.columns[-10:]:
         dict_score[col]=df_complet_clean[col].value_counts()[1]
+
+    fig2 = px.pie(data_frame=df_complet_clean, names='score')
+
+    fig2.update_layout(template='seaborn', title='Score' ,height = 800,width=500)
+    st.plotly_chart (fig2,use_container_width=True)
+
+
+
 
     fig = make_subplots(
     rows=4, cols=2,
@@ -168,10 +176,6 @@ def page1():
 
 
 
-    fig2 = px.pie(data_frame=df_complet_clean, names='score')
-
-    fig2.update_layout(template='seaborn', title='score' ,height = 800,width=500)
-    st.plotly_chart (fig2,use_container_width=True)
 
 
 
