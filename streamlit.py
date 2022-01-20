@@ -13,6 +13,10 @@ nltk.download(["names","stopwords","state_union","twitter_samples","movie_review
 from PIL import Image   
 import base64
 
+
+
+
+
 def main():
     
     pages = {
@@ -71,30 +75,25 @@ def page1():
 
 
 
+
 def page2():
     
     
-    st.markdown ('page 2')
+    st.markdown("<h1 style='text-align: center; color: black;'>Titre page 2</h1>", unsafe_allow_html=True)
     
     st.write ('-----------------------------------------------------------')
 
-    st.markdown('')
 
-        
-    st.markdown ('')
 
 
 def page3():
     
     
-    st.markdown ('page 3')
+    st.markdown("<h1 style='text-align: center; color: black;'>Titre page 3</h1>", unsafe_allow_html=True)
     
     st.write ('-----------------------------------------------------------')
 
-    st.markdown('')
 
-        
-    st.markdown ('')
 
     
     
