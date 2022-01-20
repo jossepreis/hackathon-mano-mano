@@ -187,7 +187,7 @@ def page1():
 
 
 def page2():
-    col1, col2 = st.columns([3, 1])    
+   
     
     st.markdown("<h1 style='text-align: center; color: black;'>Titre page 2</h1>", unsafe_allow_html=True)
     
