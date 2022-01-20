@@ -60,7 +60,7 @@ def homepage():
   
  
 
-    st.markdown("<h2 style='text-align: center; color: black;'>Shipping costs, barriers to purchase?</h2>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center; color: black;'>Shipping costs, barrier to ecommerce purchases?</h3>", unsafe_allow_html=True)
     st.markdown('##')
     st.markdown('##')
     st.markdown('##')
