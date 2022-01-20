@@ -20,7 +20,7 @@ import base64
 def main():
     
     pages = {
-        'Accueil': homepage,
+        'Homepage': homepage,
         'Page 1': page1,
         'Page 2': page2,
         'Page 3': page3}
@@ -60,7 +60,7 @@ def homepage():
   
  
 
-    st.markdown("<h1 style='text-align: center; color: black;'>Frais de port, freins à l'achat ?</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: black;'>Shipping costs, barriers to purchase?</h1>", unsafe_allow_html=True)
     st.markdown('##')
     st.markdown('##')
     st.markdown('##')
