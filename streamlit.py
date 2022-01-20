@@ -17,8 +17,10 @@ df_august = pd.read_csv('2022-01 Wild Code School x ManoMano_ CES Data Set.xlsx 
 df_september = pd.read_csv('2022-01 Wild Code School x ManoMano_ CES Data Set.xlsx - September 2021.csv',low_memory = False)
 df_october = pd.read_csv('2022-01 Wild Code School x ManoMano_ CES Data Set.xlsx - October 2021.csv',low_memory = False)
 df_november = pd.read_csv('2022-01 Wild Code School x ManoMano_ CES Data Set.xlsx - November 2021.csv',low_memory = False)
-df_complet_clean = pd.read_csv('csv_1er_graph.csv',low_memory=False)
-
+df_complet_clean = pd.read_csv('csv_hackathon_2.csv',low_memory=False)
+# Pivot table
+df_family_fee_avg=pd.pivot_table(data=df_complet_clean, index='family', values=['shipping_fees','ratio'], aggfunc='mean').reset_index()
+df_category_fee_avg=pd.pivot_table(data=df_complet_clean, index='category', values=['shipping_fees','ratio'], aggfunc='mean').reset_index()
 
 def main():
     
@@ -188,6 +190,15 @@ def page2():
     
     
     st.markdown("<h1 style='text-align: center; color: black;'>Titre page 2</h1>", unsafe_allow_html=True)
+    
+    fig3 = make_subplots(rows=1, cols=1)
+
+    fig3.add_trace(go.Scatter(x=df_family_fee_avg['family'], y=df_family_fee_avg['shipping_fees'], mode='lines', name= 'Avg. Shipping Fees'), row=1, col=1)
+    fig3.add_trace(go.Scatter(x=df_family_fee_avg['family'], y=df_family_fee_avg['ratio'], mode='lines', name= 'Avg. Ratio of SF on Total'), row=1, col=1)
+    fig3.update_layout(title='Shipping Fees vs Family',
+                   xaxis_title='Family')
+    st.plotly_chart (fig3,use_container_width=True)
+    
     
     st.write ('-----------------------------------------------------------')
 
