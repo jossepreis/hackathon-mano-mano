@@ -61,7 +61,7 @@ def homepage():
 
     st.write('--------------------------------------------------------------------------')
   
-    st.write('--TESTETESTETESTE---')
+ 
 
     st.markdown("<h3 style='text-align: center; color: black;'>Shipping costs: major barrier to e-commerce purchases?</h3>", unsafe_allow_html=True)
     st.markdown('##')
