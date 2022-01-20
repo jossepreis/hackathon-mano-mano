@@ -53,27 +53,23 @@ def homepage():
     
 
     st.write('--------------------------------------------------------------------------')
+  
+ 
 
+    st.markdown("<h1 style='text-align: center; color: black;'>Frais de port, freins à l'achat ?</h1>", unsafe_allow_html=True)
+    
+    
 
-    
-   
-    st.markdown('QUESTION')
-    
-    
-    st.markdown ('')
 
     
     
 def page1():
     
-    st.markdown ('page 1')
+    st.markdown("<h1 style='text-align: center; color: black;'>Titre page 1</h1>", unsafe_allow_html=True)
     
     st.write ('-----------------------------------------------------------')
 
-    st.markdown('')
 
-        
-    st.markdown ('')
 
 def page2():
     
