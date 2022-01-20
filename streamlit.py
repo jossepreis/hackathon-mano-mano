@@ -95,12 +95,12 @@ def page1():
     for i in range(0,7):
         df_score = df_complet_clean[df_complet_clean['score']==i]
         dict_score = {}
-        for col in df_score.columns[-10:]:
+        for col in df_score.columns[-16:-6]:
             dict_score[col]=df_score[col].value_counts()[1]
         list_dict.append(dict_score)
 
     dict_score = {}
-    for col in df_complet_clean.columns[-10:]:
+    for col in df_complet_clean.columns[-16:-6]:
         dict_score[col]=df_complet_clean[col].value_counts()[1]
 
     fig2 = px.pie(data_frame=df_complet_clean, names='score')
@@ -177,7 +177,7 @@ def page1():
         row=4, col=2
 )
 
-    fig.update_layout(template='seaborn', title='Reasons' ,showlegend=False,height = 1250,width=1250)
+    fig.update_layout(template='seaborn', title='reasons' ,showlegend=False,height = 1250,width=1000)
     st.plotly_chart (fig,use_container_width=True)
 
 
