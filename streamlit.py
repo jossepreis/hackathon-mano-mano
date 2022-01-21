@@ -28,7 +28,8 @@ def main():
         'Homepage': homepage,
         'EDA': page1,
         'Scores and reasons': page2,
-        'Page 3': page3}
+        'Shipping fees': page3,
+        'Conclusion': page4}
 
     if "page" not in st.session_state:
         st.session_state.update({
@@ -89,7 +90,7 @@ def page1():
     fig.update_traces(textposition='inside')
     st.plotly_chart (fig,use_container_width=True)
     
-    
+ 
 
     fig = px.pie(data_frame=df_complet_clean, names='bv_transaction_bucket',color_discrete_sequence=px.colors.qualitative.Plotly)
     fig.update_traces(textposition='inside')
@@ -98,7 +99,8 @@ def page1():
     
     st.markdown('##')
     st.markdown('##')
-    st.markdown('##')
+    st.markdown('##') 
+    st.write ('-----------------------------------------------------------')
     
     
     st.markdown("<h3 style='text-align: center; color: #117465;'>2.Shipping fees</h3>", unsafe_allow_html=True)
@@ -115,8 +117,8 @@ def page1():
     
     st.markdown('##')
     st.markdown('##')
-    st.markdown('##')
-        
+    st.markdown('##') 
+    st.write ('-----------------------------------------------------------')
     
     st.markdown("<h3 style='text-align: center; color: #117465;'>3. Customer reviews</h3>", unsafe_allow_html=True)
     st.markdown("<h2 style='text-align: center; color: black;'>Average score: 8.97</h2>", unsafe_allow_html=True)
@@ -145,7 +147,7 @@ def page2():
 
     st.markdown("<h1 style='text-align: center; color: black;'>Scores and reasons</h1>", unsafe_allow_html=True)
     st.markdown('##')
-
+    st.markdown("<h3 style='text-align: center; color: #117465;'>1.Distribution of CES score</h3>", unsafe_allow_html=True)
     list_dict = []
     for i in range(0,7):
         df_score = df_complet_clean[df_complet_clean['score']==i]
@@ -243,10 +245,17 @@ def page2():
 def page3():
     
     
-    st.markdown("<h1 style='text-align: center; color: black;'>Titre page 3</h1>", unsafe_allow_html=True)
-    st.markdown("<h3 style='text-align: center; color: #117465;'>1.Distribution of CES score</h3>", unsafe_allow_html=True)
-
-    st.markdown("<h3 style='text-align: center; color: #117465;'>1.Shipping Fees vs Family</h3>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: black;'>Shipping fees</h1>", unsafe_allow_html=True)
+    
+    
+    st.markdown("<h3 style='text-align: center; color: #117465;'>1.Shipping Fees vs Number of articles</h3>", unsafe_allow_html=True)
+    fig = px.scatter(df_complet_clean, x="shipping_fees", y="nb_articles", trendline="ols", trendline_color_override="red")
+    st.plotly_chart (fig,use_container_width=True)
+    st.markdown('##')
+    st.markdown('##')
+    st.markdown('##') 
+    st.write ('-----------------------------------------------------------')
+    st.markdown("<h3 style='text-align: center; color: #117465;'>2.Shipping Fees vs Family</h3>", unsafe_allow_html=True)
     
     fig3 = make_subplots(rows=1, cols=1)
 
@@ -254,11 +263,12 @@ def page3():
     fig3.add_trace(go.Scatter(x=df_family_fee_avg['family'], y=df_family_fee_avg['ratio'], mode='lines', name= 'Avg. Ratio of SF on Total'), row=1, col=1)
     fig3.update_layout(title='',xaxis_title='Family',height = 600,width=1200)
     st.plotly_chart (fig3,use_container_width=True)
-    
-    
+    st.markdown('##')
+    st.markdown('##')
+    st.markdown('##') 
     st.write ('-----------------------------------------------------------')
     st.markdown('##')
-    st.markdown("<h3 style='text-align: center; color: #117465;'>2.Shipping Fees vs Category</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center; color: #117465;'>3.Shipping Fees vs Category</h3>", unsafe_allow_html=True)
     fig4 = make_subplots(rows=1, cols=1)
 
     fig4.add_trace(go.Scatter(x=df_category_fee_avg['category'], y=df_category_fee_avg['shipping_fees'], mode='lines', name= 'Avg. Shipping Fees'), row=1, col=1)
@@ -266,11 +276,37 @@ def page3():
     fig4.update_layout(title='',
                    xaxis_title='Category')
     st.plotly_chart (fig4,use_container_width=True)
+    st.markdown('##')
+    st.markdown('##')
+    st.markdown('##') 
 
-
+def page4():
     
-    st.write ('-----------------------------------------------------------')
+    st.markdown("<h1 style='text-align: center; color: black;'>Conclusion</h1>", unsafe_allow_html=True)
+    st.markdown('##')
+    image1 = Image.open('Mano-Manon-new-logo reduit2.png')
+    st.image(image1)    
+    
+    
+    st.markdown('##')
+    st.markdown('##')
+    st.subheader('The analysis of the dataset provided by Mano Mano for this hackathon, shows a real concern of customers about the amount of shipping costs, and to a lesser extent, about the delivery options offered.')
 
+    st.markdown('##') 
+    st.subheader("This concern is expressed both in the reasons given when the customer's score is negative, and in the free comments.")
+
+
+    st.markdown('##') 
+    st.subheader('However, it would be much more interesting to study this phenomenon on the data of unsuccessful transactions, and also to have data on products removed from the basket during the payment phase.')
+  
+    st.markdown('##') 
+    st.markdown('##') 
+    
+    st.subheader('Several  areas deserve to be explored:')
+    st.subheader('- Flat-rate shipping costs for purchases of several items ')  
+    st.subheader('- Possibility to opt for non-urgent deliveries, with reduced shipping costs')
+    st.subheader('- Development of platforms to centralise shipments and reduce shipping costs')
+    
     
 if __name__ == "__main__":
     main()
