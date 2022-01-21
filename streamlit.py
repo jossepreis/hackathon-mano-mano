@@ -284,7 +284,7 @@ def page4():
     
     st.markdown("<h1 style='text-align: center; color: black;'>Conclusion</h1>", unsafe_allow_html=True)
     st.markdown('##')
-    image1 = Image.open('Mano-Manon-new-logo reduit2.png')
+    image1 = Image.open('logo mano M.png')
     st.image(image1)    
     
     
