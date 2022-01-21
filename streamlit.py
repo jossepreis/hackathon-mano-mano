@@ -249,7 +249,18 @@ def page3():
     
     
     st.markdown("<h3 style='text-align: center; color: #117465;'>1.Shipping Fees vs Number of articles</h3>", unsafe_allow_html=True)
-    fig = px.scatter(df_complet_clean, x="shipping_fees", y="nb_articles", trendline="ols", trendline_color_override="red")
+    df_outlier = df_complet_clean[df_complet_clean['shipping_fees']<=500]
+
+    fig = px.scatter(df_outlier,
+    x="shipping_fees",
+    y="nb_articles",
+    trendline="ols",
+    trendline_color_override="red",
+    labels = {
+        'nb_articles':'NB Articles',
+        'shipping_fees':'Shipping Fees'})
+
+    fig.update_layout(template='seaborn', title='shipping fees vs nb articles' ,height = 500,width=1000)
     st.plotly_chart (fig,use_container_width=True)
     st.markdown('##')
     st.markdown('##')
