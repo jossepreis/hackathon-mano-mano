@@ -27,7 +27,7 @@ def main():
     pages = {
         'Homepage': homepage,
         'EDA': page1,
-        'Family & Category': page2,
+        'Scores and reasons': page2,
         'Page 3': page3}
 
     if "page" not in st.session_state:
@@ -74,6 +74,78 @@ def page1():
     
     st.write ('-----------------------------------------------------------')
 
+
+
+
+    st.markdown("<h3 style='text-align: center; color: #117465;'>1.Average basket:</h3>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; color: black;'>1.32 items for 121 €.</h2>", unsafe_allow_html=True)
+
+    st.markdown('##')
+    st.markdown('##')
+    st.markdown('##')
+
+    fig = px.pie(data_frame=df_complet_clean,names='nb_articles',color_discrete_sequence=px.colors.qualitative.Plotly)
+    fig.update_layout(template='seaborn', title='nb articles',showlegend=False ,height = 800,width=500)
+    fig.update_traces(textposition='inside')
+    st.plotly_chart (fig,use_container_width=True)
+    
+    
+
+    fig = px.pie(data_frame=df_complet_clean, names='bv_transaction_bucket',color_discrete_sequence=px.colors.qualitative.Plotly)
+    fig.update_traces(textposition='inside')
+    fig.update_layout(template='seaborn', title='bv transaction bucket' ,height = 800,width=500)
+    st.plotly_chart (fig,use_container_width=True)
+    
+    st.markdown('##')
+    st.markdown('##')
+    st.markdown('##')
+    
+    
+    st.markdown("<h3 style='text-align: center; color: #117465;'>2.Shipping fees</h3>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; color: black;'>5.07 € / 4.16 % per average basket</h2>", unsafe_allow_html=True)
+    
+    st.markdown('##')
+    st.markdown('##')
+    st.markdown('##')
+    
+    fig = px.pie(data_frame=df_complet_clean, names='shipping_fees_bucket',color_discrete_sequence=px.colors.qualitative.Plotly)
+    fig.update_traces(textposition='inside')
+    fig.update_layout(template='seaborn', title='shipping fees bucket' ,height = 800,width=500)
+    st.plotly_chart (fig,use_container_width=True)
+    
+    st.markdown('##')
+    st.markdown('##')
+    st.markdown('##')
+        
+    
+    st.markdown("<h3 style='text-align: center; color: #117465;'>3. Customer reviews</h3>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; color: black;'>Average score: 8.97</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; color: black;'>6.16% of negative scores</h2>", unsafe_allow_html=True)
+    
+    st.markdown('##')
+    st.markdown('##')
+    st.markdown('##')    
+    
+    fig2 = px.pie(data_frame=df_complet_clean, names='score',color_discrete_sequence=px.colors.qualitative.Plotly)
+    fig2.update_traces(textposition='inside')
+    fig2.update_layout(template='seaborn', 
+        height = 800,
+        width=500)
+    st.plotly_chart (fig2,use_container_width=True)
+    
+    
+    
+    
+    
+    
+    
+  
+
+def page2():
+
+    st.markdown("<h1 style='text-align: center; color: black;'>Scores and reasons</h1>", unsafe_allow_html=True)
+    st.markdown('##')
+
     list_dict = []
     for i in range(0,7):
         df_score = df_complet_clean[df_complet_clean['score']==i]
@@ -85,22 +157,6 @@ def page1():
     dict_score = {}
     for col in df_complet_clean.columns[-16:-6]:
         dict_score[col]=df_complet_clean[col].value_counts()[1]
-
-    fig2 = px.pie(data_frame=df_complet_clean, names='score',color_discrete_sequence=px.colors.qualitative.Plotly)
-
-
-    st.markdown("<h3 style='text-align: center; color: #117465;'>1.Distribution of CES score</h3>", unsafe_allow_html=True)
-
-    fig2.update_traces(textposition='inside')
-    fig2.update_layout(template='seaborn', 
-        height = 800,
-        width=500)
-
-    st.plotly_chart (fig2,use_container_width=True)
-    st.markdown('##')
-    st.markdown('##')
-    st.markdown('##')
-    st.markdown('##')
 
     fig = make_subplots(
     rows=4, cols=2,
@@ -164,7 +220,7 @@ def page1():
         row=4, col=2
 )
 
-    st.markdown("<h3 style='text-align: center; color: #117465;'>2.Reasons poor CES scores</h3>", unsafe_allow_html=True)
+
 
     fig.update_layout(template='seaborn',
     showlegend=False,height = 1250,width=1000)
@@ -180,12 +236,16 @@ def page1():
     st.markdown('tag-RI: Returns Info')
     st.markdown('tag-SL: Signup/Login')
 
-    st.markdown('tag-UC: Using Coupons')   
+    st.markdown('tag-UC: Using Coupons') 
 
-def page2():
 
-    st.markdown("<h1 style='text-align: center; color: black;'>Category & family of products</h1>", unsafe_allow_html=True)
-    st.markdown('##')
+
+def page3():
+    
+    
+    st.markdown("<h1 style='text-align: center; color: black;'>Titre page 3</h1>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center; color: #117465;'>1.Distribution of CES score</h3>", unsafe_allow_html=True)
+
     st.markdown("<h3 style='text-align: center; color: #117465;'>1.Shipping Fees vs Family</h3>", unsafe_allow_html=True)
     
     fig3 = make_subplots(rows=1, cols=1)
@@ -207,10 +267,7 @@ def page2():
                    xaxis_title='Category')
     st.plotly_chart (fig4,use_container_width=True)
 
-def page3():
-    
-    
-    st.markdown("<h1 style='text-align: center; color: black;'>Titre page 3</h1>", unsafe_allow_html=True)
+
     
     st.write ('-----------------------------------------------------------')
 
