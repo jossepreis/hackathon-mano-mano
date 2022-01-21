@@ -86,22 +86,46 @@ def page1():
     for col in df_complet_clean.columns[-16:-6]:
         dict_score[col]=df_complet_clean[col].value_counts()[1]
 
+
+    st.markdown("<h3 style='text-align: center; color: #117465;'>1.Average basket:</h3>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; color: black;'>1.32 items for 121 €.</h2>", unsafe_allow_html=True)
+
+    st.markdown('Graphique 1 de josse en cours')
+    st.markdown('Graphique 2 de josse en cours')
+
+    st.markdown('##')
+    st.markdown('##')
+    st.markdown('##')
+    
+    
+    st.markdown("<h3 style='text-align: center; color: #117465;'>2.Shipping fees</h3>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; color: black;'>5.07 € / 4.16 % per average basket</h2>", unsafe_allow_html=True)
+    
+    st.markdown('##')
+    st.markdown('##')
+    st.markdown('##')
+    
+    fig = px.pie(data_frame=df_complet_clean, names='shipping_fees_bucket',color_discrete_sequence=px.colors.qualitative.Plotly)
+
+    fig.update_traces(textposition='inside')
+    fig.update_layout(template='seaborn', title='shipping fees bucket' ,height = 800,width=500)
+    st.plotly_chart (fig,use_container_width=True)
+    
+    st.markdown('##')
+    st.markdown('##')
+    st.markdown('##')
+        
+    
+    st.markdown("<h3 style='text-align: center; color: #117465;'>3. Customer reviews</h3>", unsafe_allow_html=True)
+    
     fig2 = px.pie(data_frame=df_complet_clean, names='score',color_discrete_sequence=px.colors.qualitative.Plotly)
-
-
-    st.markdown("<h3 style='text-align: center; color: #117465;'>1.Distribution of CES score</h3>", unsafe_allow_html=True)
-
     fig2.update_traces(textposition='inside')
     fig2.update_layout(template='seaborn', 
         height = 800,
         width=500)
 
     st.plotly_chart (fig2,use_container_width=True)
-    st.markdown('##')
-    st.markdown('##')
-    st.markdown('##')
-    st.markdown('##')
-
+    
     fig = make_subplots(
     rows=4, cols=2,
     subplot_titles=('total', 'score = 0','score = 1','score = 2','score = 3','score = 4','score = 5','score = 6'),
@@ -164,7 +188,7 @@ def page1():
         row=4, col=2
 )
 
-    st.markdown("<h3 style='text-align: center; color: #117465;'>2.Reasons poor CES scores</h3>", unsafe_allow_html=True)
+
 
     fig.update_layout(template='seaborn',
     showlegend=False,height = 1250,width=1000)
@@ -211,6 +235,11 @@ def page3():
     
     
     st.markdown("<h1 style='text-align: center; color: black;'>Titre page 3</h1>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center; color: #117465;'>1.Distribution of CES score</h3>", unsafe_allow_html=True)
+
+
+
+
     
     st.write ('-----------------------------------------------------------')
 
