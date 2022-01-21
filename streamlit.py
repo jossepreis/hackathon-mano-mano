@@ -260,7 +260,7 @@ def page3():
         'nb_articles':'NB Articles',
         'shipping_fees':'Shipping Fees'})
 
-    fig.update_layout(template='seaborn', title='shipping fees vs nb articles' ,height = 500,width=1000)
+    fig.update_layout(template='seaborn',height = 500,width=1000)
     st.plotly_chart (fig,use_container_width=True)
     st.markdown('##')
     st.markdown('##')
