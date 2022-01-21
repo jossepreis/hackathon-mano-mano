@@ -27,7 +27,7 @@ def main():
     pages = {
         'Homepage': homepage,
         'EDA': page1,
-        'Family & Category': page2,
+        'Scores and reasons': page2,
         'Page 3': page3}
 
     if "page" not in st.session_state:
@@ -74,25 +74,28 @@ def page1():
     
     st.write ('-----------------------------------------------------------')
 
-    list_dict = []
-    for i in range(0,7):
-        df_score = df_complet_clean[df_complet_clean['score']==i]
-        dict_score = {}
-        for col in df_score.columns[-16:-6]:
-            dict_score[col]=df_score[col].value_counts()[1]
-        list_dict.append(dict_score)
 
-    dict_score = {}
-    for col in df_complet_clean.columns[-16:-6]:
-        dict_score[col]=df_complet_clean[col].value_counts()[1]
 
 
     st.markdown("<h3 style='text-align: center; color: #117465;'>1.Average basket:</h3>", unsafe_allow_html=True)
     st.markdown("<h2 style='text-align: center; color: black;'>1.32 items for 121 €.</h2>", unsafe_allow_html=True)
 
-    st.markdown('Graphique 1 de josse en cours')
-    st.markdown('Graphique 2 de josse en cours')
+    st.markdown('##')
+    st.markdown('##')
+    st.markdown('##')
 
+    fig = px.pie(data_frame=df_complet_clean,names='nb_articles',color_discrete_sequence=px.colors.qualitative.Plotly)
+    fig.update_layout(template='seaborn', title='nb articles',showlegend=False ,height = 800,width=500)
+    fig.update_traces(textposition='inside')
+    st.plotly_chart (fig,use_container_width=True)
+    
+    
+
+    fig = px.pie(data_frame=df_complet_clean, names='bv_transaction_bucket',color_discrete_sequence=px.colors.qualitative.Plotly)
+    fig.update_traces(textposition='inside')
+    fig.update_layout(template='seaborn', title='bv transaction bucket' ,height = 800,width=500)
+    st.plotly_chart (fig,use_container_width=True)
+    
     st.markdown('##')
     st.markdown('##')
     st.markdown('##')
@@ -140,28 +143,20 @@ def page1():
 
 def page2():
 
-    st.markdown("<h1 style='text-align: center; color: black;'>Category & family of products</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: black;'>Scores and reasons</h1>", unsafe_allow_html=True)
     st.markdown('##')
-    st.markdown("<h3 style='text-align: center; color: #117465;'>1.Shipping Fees vs Family</h3>", unsafe_allow_html=True)
-    
-    fig3 = make_subplots(rows=1, cols=1)
 
-    fig3.add_trace(go.Scatter(x=df_family_fee_avg['family'], y=df_family_fee_avg['shipping_fees'], mode='lines', name= 'Avg. Shipping Fees'), row=1, col=1)
-    fig3.add_trace(go.Scatter(x=df_family_fee_avg['family'], y=df_family_fee_avg['ratio'], mode='lines', name= 'Avg. Ratio of SF on Total'), row=1, col=1)
-    fig3.update_layout(title='',xaxis_title='Family',height = 600,width=1200)
-    st.plotly_chart (fig3,use_container_width=True)
-    
-    
-    st.write ('-----------------------------------------------------------')
-    st.markdown('##')
-    st.markdown("<h3 style='text-align: center; color: #117465;'>2.Shipping Fees vs Category</h3>", unsafe_allow_html=True)
-    fig4 = make_subplots(rows=1, cols=1)
+    list_dict = []
+    for i in range(0,7):
+        df_score = df_complet_clean[df_complet_clean['score']==i]
+        dict_score = {}
+        for col in df_score.columns[-16:-6]:
+            dict_score[col]=df_score[col].value_counts()[1]
+        list_dict.append(dict_score)
 
-    fig4.add_trace(go.Scatter(x=df_category_fee_avg['category'], y=df_category_fee_avg['shipping_fees'], mode='lines', name= 'Avg. Shipping Fees'), row=1, col=1)
-    fig4.add_trace(go.Scatter(x=df_category_fee_avg['category'], y=df_category_fee_avg['ratio'], mode='lines', name= 'Avg. Ratio of SF on Total'), row=1, col=1)
-    fig4.update_layout(title='',
-                   xaxis_title='Category')
-    st.plotly_chart (fig4,use_container_width=True)
+    dict_score = {}
+    for col in df_complet_clean.columns[-16:-6]:
+        dict_score[col]=df_complet_clean[col].value_counts()[1]
 
     fig = make_subplots(
     rows=4, cols=2,
@@ -251,7 +246,26 @@ def page3():
     st.markdown("<h1 style='text-align: center; color: black;'>Titre page 3</h1>", unsafe_allow_html=True)
     st.markdown("<h3 style='text-align: center; color: #117465;'>1.Distribution of CES score</h3>", unsafe_allow_html=True)
 
+    st.markdown("<h3 style='text-align: center; color: #117465;'>1.Shipping Fees vs Family</h3>", unsafe_allow_html=True)
+    
+    fig3 = make_subplots(rows=1, cols=1)
 
+    fig3.add_trace(go.Scatter(x=df_family_fee_avg['family'], y=df_family_fee_avg['shipping_fees'], mode='lines', name= 'Avg. Shipping Fees'), row=1, col=1)
+    fig3.add_trace(go.Scatter(x=df_family_fee_avg['family'], y=df_family_fee_avg['ratio'], mode='lines', name= 'Avg. Ratio of SF on Total'), row=1, col=1)
+    fig3.update_layout(title='',xaxis_title='Family',height = 600,width=1200)
+    st.plotly_chart (fig3,use_container_width=True)
+    
+    
+    st.write ('-----------------------------------------------------------')
+    st.markdown('##')
+    st.markdown("<h3 style='text-align: center; color: #117465;'>2.Shipping Fees vs Category</h3>", unsafe_allow_html=True)
+    fig4 = make_subplots(rows=1, cols=1)
+
+    fig4.add_trace(go.Scatter(x=df_category_fee_avg['category'], y=df_category_fee_avg['shipping_fees'], mode='lines', name= 'Avg. Shipping Fees'), row=1, col=1)
+    fig4.add_trace(go.Scatter(x=df_category_fee_avg['category'], y=df_category_fee_avg['ratio'], mode='lines', name= 'Avg. Ratio of SF on Total'), row=1, col=1)
+    fig4.update_layout(title='',
+                   xaxis_title='Category')
+    st.plotly_chart (fig4,use_container_width=True)
 
 
     
