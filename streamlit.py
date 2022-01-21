@@ -21,6 +21,7 @@ df_complet_clean = pd.read_csv('csv_hackathon_2.csv',low_memory=False)
 # Pivot table
 df_family_fee_avg=pd.pivot_table(data=df_complet_clean, index='family', values=['shipping_fees','ratio'], aggfunc='mean').reset_index()
 df_category_fee_avg=pd.pivot_table(data=df_complet_clean, index='category', values=['shipping_fees','ratio'], aggfunc='mean').reset_index()
+df_outlier = df_complet_clean[df_complet_clean['shipping_fees']<=500]
 st.set_page_config(layout="wide")
 def main():
     
@@ -250,6 +251,18 @@ def page3():
     
     st.markdown("<h3 style='text-align: center; color: #117465;'>1.Shipping Fees vs Number of articles</h3>", unsafe_allow_html=True)
 
+
+    fig = px.scatter(df_outlier,
+    x="shipping_fees",
+    y="nb_articles",
+    trendline="ols",
+    trendline_color_override="red",
+    labels = {
+        'nb_articles':'NB Articles',
+        'shipping_fees':'Shipping Fees'})
+
+    fig.update_layout(template='seaborn',height = 500,width=1000)
+    st.plotly_chart (fig,use_container_width=True)
     st.markdown('##')
     st.markdown('##')
     st.markdown('##') 
