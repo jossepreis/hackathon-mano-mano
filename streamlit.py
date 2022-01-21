@@ -70,7 +70,7 @@ def homepage():
 
 def page1():
     
-    st.markdown("<h1 style='text-align: center; color: black;'>CES Score</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: black;'>Data exploration: Some key figures</h1>", unsafe_allow_html=True)
     
     st.write ('-----------------------------------------------------------')
 
