@@ -12,7 +12,7 @@ import nltk
 nltk.download(["names","stopwords","state_union","twitter_samples","movie_reviews","averaged_perceptron_tagger","vader_lexicon","punkt" ])
 from PIL import Image   
 import base64
-import statsmodels as sm
+
 df_august = pd.read_csv('2022-01 Wild Code School x ManoMano_ CES Data Set.xlsx - August 2021.csv',low_memory = False)
 df_september = pd.read_csv('2022-01 Wild Code School x ManoMano_ CES Data Set.xlsx - September 2021.csv',low_memory = False)
 df_october = pd.read_csv('2022-01 Wild Code School x ManoMano_ CES Data Set.xlsx - October 2021.csv',low_memory = False)
