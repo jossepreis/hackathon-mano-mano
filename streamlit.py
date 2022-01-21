@@ -1,4 +1,4 @@
-
+from enum import auto
 import streamlit as st
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -21,13 +21,13 @@ df_complet_clean = pd.read_csv('csv_hackathon_2.csv',low_memory=False)
 # Pivot table
 df_family_fee_avg=pd.pivot_table(data=df_complet_clean, index='family', values=['shipping_fees','ratio'], aggfunc='mean').reset_index()
 df_category_fee_avg=pd.pivot_table(data=df_complet_clean, index='category', values=['shipping_fees','ratio'], aggfunc='mean').reset_index()
-st.set_page_config(layout="centered")
+st.set_page_config(layout="wide")
 def main():
     
     pages = {
         'Homepage': homepage,
-        'Page 1': page1,
-        'Page 2': page2,
+        'CES Score': page1,
+        'Family & Category': page2,
         'Page 3': page3}
 
     if "page" not in st.session_state:
@@ -41,17 +41,11 @@ def main():
 
     pages[page]()
 
-
-
 def homepage():
     st.markdown('')
-    image1 = Image.open('Mano-Manon-new-logo reduit.png')
-    st.image(image1,)
-  
-
-    
-    
-    file_ = open("manamanoreduit.gif", "rb")
+    image1 = Image.open('Mano-Manon-new-logo reduit2.png')
+    st.image(image1)
+    file_ = open("manamanoreduit2.png", "rb")
     contents = file_.read()
     data_url = base64.b64encode(contents).decode("utf-8")
     file_.close()
@@ -60,18 +54,13 @@ def homepage():
         f'<img src="data:image/gif;base64,{data_url}" >',
     unsafe_allow_html=True,)
     
-
     st.write('--------------------------------------------------------------------------')
   
- 
-
-    st.markdown("<h3 style='text-align: center; color: black;'>Shipping costs: major barrier to e-commerce purchases?</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center; color: black;'>SHIPPING FEES:</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center; color: black;'>Major barriers in Mano Mano's customer journey?</h3>", unsafe_allow_html=True)
     st.markdown('##')
     st.markdown('##')
     st.markdown('##')
-    st.markdown('##')
-    
-    
     
     audio_file = open('Mahna Mahna (mais Non Mais Non) (radio Edit) Free Download  (hearthis.at).mp3', 'rb')
     audio_bytes = audio_file.read()
@@ -79,17 +68,11 @@ def homepage():
     st.audio(audio_bytes, format='audio/ogg')
     
 
-
-    
-    
 def page1():
     
-    st.markdown("<h1 style='text-align: center; color: black;'>Titre page 1</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: black;'>CES Score</h1>", unsafe_allow_html=True)
     
     st.write ('-----------------------------------------------------------')
-
-
-
 
     list_dict = []
     for i in range(0,7):
@@ -105,20 +88,19 @@ def page1():
 
     fig2 = px.pie(data_frame=df_complet_clean, names='score',color_discrete_sequence=px.colors.qualitative.Plotly)
 
-    fig2.update_traces(textposition='inside')
-    fig2.update_layout(template='seaborn', title={
-        'text': 'distribution of CES score',
-        'y':0.97,
-        'x':0.05} ,height = 800,width=500)
 
+    st.markdown("<h3 style='text-align: center; color: #117465;'>1.Distribution of CES score</h3>", unsafe_allow_html=True)
+
+    fig2.update_traces(textposition='inside')
+    fig2.update_layout(template='seaborn', 
+        height = 800,
+        width=500)
 
     st.plotly_chart (fig2,use_container_width=True)
     st.markdown('##')
     st.markdown('##')
     st.markdown('##')
     st.markdown('##')
-
-
 
     fig = make_subplots(
     rows=4, cols=2,
@@ -182,43 +164,48 @@ def page1():
         row=4, col=2
 )
 
-    fig.update_layout(template='seaborn', title={
-        'text': 'reasons of bad CES score',
-        'y':0.97,
-        'x':0.05} ,showlegend=False,height = 1250,width=1000)
+    st.markdown("<h3 style='text-align: center; color: #117465;'>2.Reasons poor CES scores</h3>", unsafe_allow_html=True)
+
+    fig.update_layout(template='seaborn',
+    showlegend=False,height = 1250,width=1000)
     st.plotly_chart (fig,use_container_width=True)
 
+    st.markdown("tag-DF: Delivery Fee")
+    st.markdown('tag-DO: Delivery Options')
+    st.markdown('tag-DP: Difficulty Paying')
+    st.markdown('tag-FCP: Finding Compatible Products')
+    st.markdown('tag-FP: Finding Products')
+    st.markdown('tag-PI: Product Info')
+    st.markdown('tag-PS: Presales Support')
+    st.markdown('tag-RI: Returns Info')
+    st.markdown('tag-SL: Signup/Login')
 
-
-
-
-
+    st.markdown('tag-UC: Using Coupons')   
 
 def page2():
 
-
-    st.markdown("<h1 style='text-align: center; color: black;'>Titre page 2</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: black;'>Category & family of products</h1>", unsafe_allow_html=True)
+    st.markdown('##')
+    st.markdown("<h3 style='text-align: center; color: #117465;'>1.Shipping Fees vs Family</h3>", unsafe_allow_html=True)
     
     fig3 = make_subplots(rows=1, cols=1)
 
     fig3.add_trace(go.Scatter(x=df_family_fee_avg['family'], y=df_family_fee_avg['shipping_fees'], mode='lines', name= 'Avg. Shipping Fees'), row=1, col=1)
     fig3.add_trace(go.Scatter(x=df_family_fee_avg['family'], y=df_family_fee_avg['ratio'], mode='lines', name= 'Avg. Ratio of SF on Total'), row=1, col=1)
-    fig3.update_layout(title='Shipping Fees vs Family',xaxis_title='Family',height = 600,width=1200)
+    fig3.update_layout(title='',xaxis_title='Family',height = 600,width=1200)
     st.plotly_chart (fig3,use_container_width=True)
     
     
     st.write ('-----------------------------------------------------------')
-
-
+    st.markdown('##')
+    st.markdown("<h3 style='text-align: center; color: #117465;'>2.Shipping Fees vs Category</h3>", unsafe_allow_html=True)
     fig4 = make_subplots(rows=1, cols=1)
 
     fig4.add_trace(go.Scatter(x=df_category_fee_avg['category'], y=df_category_fee_avg['shipping_fees'], mode='lines', name= 'Avg. Shipping Fees'), row=1, col=1)
     fig4.add_trace(go.Scatter(x=df_category_fee_avg['category'], y=df_category_fee_avg['ratio'], mode='lines', name= 'Avg. Ratio of SF on Total'), row=1, col=1)
-    fig4.update_layout(title='Shipping Fees vs Category',
+    fig4.update_layout(title='',
                    xaxis_title='Category')
     st.plotly_chart (fig4,use_container_width=True)
-
-
 
 def page3():
     
@@ -227,9 +214,6 @@ def page3():
     
     st.write ('-----------------------------------------------------------')
 
-
-
-    
     
 if __name__ == "__main__":
     main()
